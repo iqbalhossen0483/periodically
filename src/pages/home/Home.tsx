@@ -1,6 +1,5 @@
 import {
   Button,
-  Container,
   Pagination,
   Table,
   TableBody,
@@ -74,7 +73,8 @@ function Home() {
   const headers: string[] = ["Title", "URL", "Author", "Created_at", ""];
 
   return (
-    <Container className='my-5' onClick={() => setShowJson(-1)}>
+    <div className='m-5' onClick={() => setShowJson(-1)}>
+      <p className='hidden'>test home</p>
       {pagePost && (
         <TableContainer>
           <Table>
@@ -131,7 +131,7 @@ function Home() {
           />
         )}
       </div>
-    </Container>
+    </div>
   );
 }
 
