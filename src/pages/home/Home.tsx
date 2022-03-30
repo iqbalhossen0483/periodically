@@ -1,12 +1,12 @@
-import { Button, Pagination } from "@mui/material";
+import { Button, Container, Grid, Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import Json from "../json data/Json";
 
 function Home() {
-  const [post, setPost] = useState<Post[] | []>([]);
-  const [showJson, setShowJson] = useState<number>(-1);
-  const [pageNumber, setPageNumber] = useState<number>(1);
   const [pagePost, setPagePost] = useState<Post[] | null>(null);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [showJson, setShowJson] = useState<number>(-1);
+  const [post, setPost] = useState<Post[] | []>([]);
 
   async function loadData(pageNum: string): Promise<Post[]> {
     const url: string = `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${pageNum}`;
@@ -60,45 +60,49 @@ function Home() {
   }
 
   return (
-    <div className='post-container' onClick={() => setShowJson(-1)}>
-      {pagePost
-        ? pagePost.map((item, index) => {
+    <Container className='my-5' onClick={() => setShowJson(-1)}>
+      <Grid container spacing={2}>
+        {pagePost &&
+          pagePost.map((item, index) => {
             const date = item.created_at.slice(0, 10);
             const time = item.created_at.slice(11, 19);
             return (
-              <div key={index} className='post'>
-                <h2 className='title'>{item.title}</h2>
-                <p className='author'>Author: {item.author}</p>
-                <p className='text-lg mb-10'>
-                  {date} {time}
-                </p>
-                <Button
-                  className='see-post'
-                  href={item.url}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  variant='outlined'
-                >
-                  See Post
-                </Button>
-                <Button
-                  className='json'
-                  onClick={(e) => {
-                    toggleJson(index);
-                    e.stopPropagation();
-                  }}
-                >
-                  json
-                </Button>
-                {showJson === index && (
-                  <Json data={item} showJson={showJson} fn={setShowJson} />
-                )}
-              </div>
+              <Grid item key={index} xs={4}>
+                <div className='post'>
+                  <h2 className='title'>{item.title}</h2>
+                  <p className='author'>Author: {item.author}</p>
+                  <p className='text-lg mb-10'>
+                    {date} {time}
+                  </p>
+                  <Button
+                    className='see-post'
+                    href={item.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    variant='outlined'
+                  >
+                    See Post
+                  </Button>
+                  <Button
+                    className='json'
+                    onClick={(e) => {
+                      toggleJson(index);
+                      e.stopPropagation();
+                    }}
+                  >
+                    json
+                  </Button>
+                  {showJson === index && (
+                    <Json data={item} showJson={showJson} fn={setShowJson} />
+                  )}
+                </div>
+              </Grid>
             );
-          })
-        : ""}
+          })}
+      </Grid>
+
       <div className='pagination'>
-        {pageNumber > 1 && (
+        {pagePost && (
           <Pagination
             onChange={(e, value) => handlePagination(value - 1)}
             count={pageNumber}
@@ -106,7 +110,7 @@ function Home() {
           />
         )}
       </div>
-    </div>
+    </Container>
   );
 }
 

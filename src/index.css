@@ -8,7 +8,7 @@
     @apply m-10 grid grid-cols-3 gap-5 text-xl;
   }
   .post {
-    @apply border rounded hover:shadow-lg px-3 py-5 relative;
+    @apply border h-full rounded hover:shadow-lg px-3 py-5 relative;
   }
   .post .title {
     @apply text-2xl font-semibold mb-5 text-violet-700 text-justify;
