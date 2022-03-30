@@ -1,13 +1,36 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  /* home page */
+  .post-container {
+    @apply m-10 grid grid-cols-3 gap-5 text-xl;
+  }
+  .post {
+    @apply border rounded hover:shadow-lg px-3 py-5 relative;
+  }
+  .post .title {
+    @apply text-2xl font-semibold mb-5 text-violet-700 text-justify;
+  }
+  .post .author {
+    @apply font-medium;
+  }
+  .post .see-post {
+    @apply absolute bottom-3 left-[35%];
+  }
+  .post .json {
+    @apply absolute right-3 bottom-3;
+  }
+  .pagination {
+    @apply col-span-3 mt-10 flex justify-center space-x-4;
+  }
+
+  /* json component */
+  .json-container {
+    @apply fixed top-10 left-10 bg-white z-20 w-[92.5vw] p-10 text-justify shadow-xl overflow-hidden text-clip;
+  }
+  .json-container .close {
+    @apply absolute top-2 right-2 font-semibold cursor-pointer;
+  }
 }
