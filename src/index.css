@@ -28,7 +28,7 @@
 
   /* json component */
   .json-container {
-    @apply fixed top-10 left-10 bg-white z-20 w-[92.5vw] p-10 text-justify shadow-xl overflow-hidden text-clip;
+    @apply fixed top-[30%] left-10 bg-white z-20 w-[92.5vw] p-10 text-justify shadow-xl overflow-hidden text-clip;
   }
   .json-container .close {
     @apply absolute top-2 right-2 font-semibold cursor-pointer;

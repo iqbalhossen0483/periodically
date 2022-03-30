@@ -1,13 +1,18 @@
 import { FC } from "react";
+import "./json.css";
 
 interface Props {
   data: Post;
+  showJson: number;
   fn: (active: number) => void;
 }
 
-const Json: FC<Props> = ({ data, fn }) => {
+const Json: FC<Props> = ({ data, showJson, fn }) => {
   return (
-    <div className='json-container' onClick={(e) => e.stopPropagation()}>
+    <div
+      className={`json-container ${showJson && "show"}`}
+      onClick={(e) => e.stopPropagation()}
+    >
       <span onClick={() => fn(-1)} className='close'>
         &#x2715;
       </span>
