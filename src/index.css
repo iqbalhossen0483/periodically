@@ -4,24 +4,6 @@
 
 @layer components {
   /* home page */
-  .post-container {
-    @apply m-10 grid grid-cols-3 gap-5 text-xl;
-  }
-  .post {
-    @apply border h-full rounded hover:shadow-lg px-3 py-5 relative;
-  }
-  .post .title {
-    @apply text-2xl font-semibold mb-5 text-violet-700 text-justify;
-  }
-  .post .author {
-    @apply font-medium;
-  }
-  .post .see-post {
-    @apply absolute bottom-3 left-[35%];
-  }
-  .post .json {
-    @apply absolute right-3 bottom-3;
-  }
   .pagination {
     @apply col-span-3 mt-10 flex justify-center space-x-4;
   }

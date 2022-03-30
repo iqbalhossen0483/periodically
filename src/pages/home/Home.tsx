@@ -1,4 +1,14 @@
-import { Button, Container, Grid, Pagination } from "@mui/material";
+import {
+  Button,
+  Container,
+  Pagination,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import Json from "../json data/Json";
 
@@ -59,47 +69,63 @@ function Home() {
     setPagePost(pageData);
   }
 
+  const headers: string[] = ["Title", "Author", "Post Time", ""];
+
   return (
     <Container className='my-5' onClick={() => setShowJson(-1)}>
-      <Grid container spacing={2}>
-        {pagePost &&
-          pagePost.map((item, index) => {
-            const date = item.created_at.slice(0, 10);
-            const time = item.created_at.slice(11, 19);
-            return (
-              <Grid item key={index} xs={4}>
-                <div className='post'>
-                  <h2 className='title'>{item.title}</h2>
-                  <p className='author'>Author: {item.author}</p>
-                  <p className='text-lg mb-10'>
-                    {date} {time}
-                  </p>
-                  <Button
-                    className='see-post'
-                    href={item.url}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    variant='outlined'
-                  >
-                    See Post
-                  </Button>
-                  <Button
-                    className='json'
-                    onClick={(e) => {
-                      toggleJson(index);
-                      e.stopPropagation();
-                    }}
-                  >
-                    json
-                  </Button>
-                  {showJson === index && (
-                    <Json data={item} showJson={showJson} fn={setShowJson} />
-                  )}
-                </div>
-              </Grid>
-            );
-          })}
-      </Grid>
+      {pagePost && (
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {headers.map((item, index) => (
+                  <TableCell align='center' key={index}>
+                    <p className='text-xl font-semibold'>{item}</p>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {pagePost.map((item, index) => {
+                const date = item.created_at.slice(0, 10);
+                const time = item.created_at.slice(11, 19);
+                return (
+                  <TableRow hover key={item.objectID}>
+                    <TableCell>{item.title}</TableCell>
+                    <TableCell>{item.author}</TableCell>
+                    <TableCell>
+                      {date} {time}
+                    </TableCell>
+                    <TableCell>
+                      <div className='space-x-2'>
+                        <Button
+                          href={item.url}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          variant='outlined'
+                        >
+                          See Post
+                        </Button>
+                        <Button
+                          onClick={(e) => {
+                            toggleJson(index);
+                            e.stopPropagation();
+                          }}
+                        >
+                          json
+                        </Button>
+                      </div>
+                    </TableCell>
+                    {showJson === index && (
+                      <Json data={item} showJson={showJson} fn={setShowJson} />
+                    )}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
 
       <div className='pagination'>
         {pagePost && (
