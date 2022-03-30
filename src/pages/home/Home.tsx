@@ -38,7 +38,9 @@ function Home() {
         const data = await loadData(pageNum.toString());
 
         // clear the interval after getting all data;
-        if (!data.length) clearInterval(interval);
+        if (!data.length) {
+          clearInterval(interval);
+        }
 
         setPost((prev) => [...prev, ...data]);
         //page count increase;
@@ -69,7 +71,7 @@ function Home() {
     setPagePost(pageData);
   }
 
-  const headers: string[] = ["Title", "Author", "Post Time", ""];
+  const headers: string[] = ["Title", "URL", "Author", "Created_at", ""];
 
   return (
     <Container className='my-5' onClick={() => setShowJson(-1)}>
@@ -92,20 +94,13 @@ function Home() {
                 return (
                   <TableRow hover key={item.objectID}>
                     <TableCell>{item.title}</TableCell>
+                    <TableCell>{item.url || "url"}</TableCell>
                     <TableCell>{item.author}</TableCell>
                     <TableCell>
                       {date} {time}
                     </TableCell>
                     <TableCell>
                       <div className='space-x-2'>
-                        <Button
-                          href={item.url}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                          variant='outlined'
-                        >
-                          See Post
-                        </Button>
                         <Button
                           onClick={(e) => {
                             toggleJson(index);
