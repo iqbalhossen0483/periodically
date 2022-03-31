@@ -65,8 +65,7 @@ function Home() {
   const headers: string[] = ["Title", "URL", "Author", "Created_at"];
 
   return (
-    <div className='m-5'>
-      <p className='hidden'>test home</p>
+    <div className='m-5' role='table'>
       {pagePost && (
         <TableContainer>
           <Table>
@@ -93,8 +92,12 @@ function Home() {
                     hover
                     key={index}
                   >
-                    <TableCell>{item.title?.slice(0, 50)}</TableCell>
-                    <TableCell>{item.url || "url"}</TableCell>
+                    <TableCell>
+                      <span className='break-words'>{item.title}</span>
+                    </TableCell>
+                    <TableCell>
+                      <span>{item.url?.slice(0, 50) || "url"}</span>
+                    </TableCell>
                     <TableCell>{item.author}</TableCell>
                     <TableCell>
                       {date} {time}

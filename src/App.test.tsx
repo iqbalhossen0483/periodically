@@ -5,13 +5,13 @@ import Json from "./pages/json data/Json";
 
 test("render App component", () => {
   render(<App />);
-  const appComponent = screen.getByText("test app");
+  const appComponent = screen.getByRole("application");
   expect(appComponent).toBeInTheDocument();
 });
 
 test("render Home page", async () => {
   render(<Home />);
-  const homeComponent = await screen.findByText("test home");
+  const homeComponent = await screen.findByRole("table");
   expect(homeComponent).toBeInTheDocument();
 });
 
