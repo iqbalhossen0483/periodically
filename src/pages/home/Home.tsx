@@ -1,5 +1,4 @@
 import {
-  Button,
   Pagination,
   Table,
   TableBody,
@@ -9,13 +8,14 @@ import {
   TableRow,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import Json from "../json data/Json";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [pagePost, setPagePost] = useState<Post[] | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
-  const [showJson, setShowJson] = useState<number>(-1);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   const [post, setPost] = useState<Post[] | []>([]);
+  const navigate = useNavigate();
 
   async function loadData(pageNum: string): Promise<Post[]> {
     const url: string = `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${pageNum}`;
@@ -48,15 +48,6 @@ function Home() {
     })();
   }, []);
 
-  //json component toggle;
-  function toggleJson(index: number) {
-    if (showJson === index) {
-      setShowJson(-1);
-    } else {
-      setShowJson(index);
-    }
-  }
-
   //pagination function;
   function handlePagination(pageNum: number) {
     const start = pageNum * 20 + 1;
@@ -68,12 +59,13 @@ function Home() {
       }
     }
     setPagePost(pageData);
+    setCurrentPage((prev) => prev + 1);
   }
 
-  const headers: string[] = ["Title", "URL", "Author", "Created_at", ""];
+  const headers: string[] = ["Title", "URL", "Author", "Created_at"];
 
   return (
-    <div className='m-5' onClick={() => setShowJson(-1)}>
+    <div className='m-5'>
       <p className='hidden'>test home</p>
       {pagePost && (
         <TableContainer>
@@ -92,28 +84,21 @@ function Home() {
                 const date = item.created_at.slice(0, 10);
                 const time = item.created_at.slice(11, 19);
                 return (
-                  <TableRow hover key={item.objectID}>
-                    <TableCell>{item.title}</TableCell>
+                  <TableRow
+                    onClick={() =>
+                      navigate(
+                        `/json/${item.objectID}&&${currentPage.toString()}`
+                      )
+                    }
+                    hover
+                    key={index}
+                  >
+                    <TableCell>{item.title?.slice(0, 50)}</TableCell>
                     <TableCell>{item.url || "url"}</TableCell>
                     <TableCell>{item.author}</TableCell>
                     <TableCell>
                       {date} {time}
                     </TableCell>
-                    <TableCell>
-                      <div className='space-x-2'>
-                        <Button
-                          onClick={(e) => {
-                            toggleJson(index);
-                            e.stopPropagation();
-                          }}
-                        >
-                          json
-                        </Button>
-                      </div>
-                    </TableCell>
-                    {showJson === index && (
-                      <Json data={item} showJson={showJson} fn={setShowJson} />
-                    )}
                   </TableRow>
                 );
               })}

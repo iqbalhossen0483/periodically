@@ -1,10 +1,15 @@
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
+import Json from "./pages/json data/Json";
 
 function App() {
   return (
     <div>
       <p className='hidden'>test app</p>
-      <Home />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/json/:query' element={<Json />} />
+      </Routes>
     </div>
   );
 }
