@@ -21,11 +21,7 @@ const Json = () => {
     })();
   }, [objectId, pageNum]);
 
-  return (
-    <div role='columnheader' className='break-words'>
-      {jsonData && <p>{jsonData}</p>}
-    </div>
-  );
+  return <div role='columnheader'>{jsonData && <pre>{jsonData}</pre>}</div>;
 };
 
 export default Json;
