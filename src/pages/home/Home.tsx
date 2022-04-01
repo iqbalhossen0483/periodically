@@ -1,5 +1,4 @@
 import {
-  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -9,13 +8,14 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import usePost from "../../hooks/usePost";
+import PaginationComponent from "./Pagination";
 
 function Home() {
   const navigate = useNavigate();
   const post = usePost();
 
   const headers: string[] = ["Title", "URL", "Author", "Created_at"];
-  console.log(post?.currentPage);
+
   return (
     <div className='m-5' role='table'>
       {post?.pagePost && (
@@ -65,13 +65,7 @@ function Home() {
       )}
 
       <div className='pagination'>
-        {post?.pagePost && (
-          <Pagination
-            onChange={(e, value) => post?.handlePagination(value - 1)}
-            count={post?.pageNumber}
-            color='secondary'
-          />
-        )}
+        {post?.pagePost && <PaginationComponent />}
       </div>
     </div>
   );
