@@ -24,4 +24,4 @@ function PaginationComponent() {
   );
 }
 
-export default React.memo(PaginationComponent);
+export default PaginationComponent;
