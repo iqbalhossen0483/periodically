@@ -16,12 +16,16 @@ const Json = () => {
 
       const findTarget = data.hits.find((item) => item.objectID === objectId);
       if (findTarget) {
-        setJsonData(JSON.stringify(findTarget));
+        setJsonData(JSON.stringify(findTarget, undefined, 2));
       }
     })();
   }, [objectId, pageNum]);
 
-  return <div role='columnheader'>{jsonData && <pre>{jsonData}</pre>}</div>;
+  return (
+    <div role='columnheader' className='w-screen p-5'>
+      {jsonData && <pre>{jsonData}</pre>}
+    </div>
+  );
 };
 
 export default Json;
