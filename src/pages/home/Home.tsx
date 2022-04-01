@@ -12,13 +12,13 @@ import usePost from "../../hooks/usePost";
 
 function Home() {
   const navigate = useNavigate();
-  const { pageNumber, pagePost, currentPage, handlePagination } = usePost();
+  const post = usePost();
 
   const headers: string[] = ["Title", "URL", "Author", "Created_at"];
-
+  console.log(post?.currentPage);
   return (
     <div className='m-5' role='table'>
-      {pagePost && (
+      {post?.pagePost && (
         <TableContainer>
           <Table>
             <TableHead>
@@ -31,14 +31,16 @@ function Home() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {pagePost.map((item, index) => {
+              {post?.pagePost.map((item, index) => {
                 const date = item.created_at.slice(0, 10);
                 const time = item.created_at.slice(11, 19);
                 return (
                   <TableRow
                     onClick={() =>
                       navigate(
-                        `/json/${item.objectID}&&${currentPage.toString()}`
+                        `/json/${
+                          item.objectID
+                        }&&${post?.currentPage.toString()}`
                       )
                     }
                     hover
@@ -63,10 +65,10 @@ function Home() {
       )}
 
       <div className='pagination'>
-        {pagePost && (
+        {post?.pagePost && (
           <Pagination
-            onChange={(e, value) => handlePagination(value - 1)}
-            count={pageNumber}
+            onChange={(e, value) => post?.handlePagination(value - 1)}
+            count={post?.pageNumber}
             color='secondary'
           />
         )}
