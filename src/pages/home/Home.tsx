@@ -17,15 +17,15 @@ function Home() {
   const headers: string[] = ["Title", "URL", "Author", "Created_at"];
 
   return (
-    <div className='m-5' role='table'>
+    <div className="m-5" role="table">
       {post?.pagePost && (
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
                 {headers.map((item, index) => (
-                  <TableCell align='center' key={index}>
-                    <p className='text-xl font-semibold'>{item}</p>
+                  <TableCell align="center" key={index}>
+                    <p className="text-xl font-semibold">{item}</p>
                   </TableCell>
                 ))}
               </TableRow>
@@ -36,6 +36,7 @@ function Home() {
                 const time = item.created_at.slice(11, 19);
                 return (
                   <TableRow
+                    role={"row"}
                     onClick={() =>
                       navigate(
                         `/json/${
@@ -47,7 +48,7 @@ function Home() {
                     key={index}
                   >
                     <TableCell>
-                      <span className='break-words'>{item.title}</span>
+                      <span className="break-words">{item.title}</span>
                     </TableCell>
                     <TableCell>
                       <span>{item.url?.slice(0, 50) || "url"}</span>
@@ -64,7 +65,7 @@ function Home() {
         </TableContainer>
       )}
 
-      <div className='pagination'>
+      <div className="pagination">
         {post?.pagePost && <PaginationComponent />}
       </div>
     </div>

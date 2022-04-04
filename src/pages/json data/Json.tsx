@@ -22,7 +22,7 @@ const Json = () => {
   }, [objectId, pageNum]);
 
   return (
-    <div role='columnheader' className='w-screen p-5'>
+    <div role={"listitem"} className="w-screen p-5">
       {jsonData && <pre>{jsonData}</pre>}
     </div>
   );

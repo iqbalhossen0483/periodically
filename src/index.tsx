@@ -4,13 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import PostProvider from "./contex api/PostProvider";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <PostProvider>
+  <PostProvider>
+    <BrowserRouter>
       <App />
-    </PostProvider>
-  </React.StrictMode>,
+    </BrowserRouter>
+  </PostProvider>,
   document.getElementById("root")
 );
 

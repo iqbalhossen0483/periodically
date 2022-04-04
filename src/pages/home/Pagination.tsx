@@ -1,5 +1,4 @@
 import usePost from "../../hooks/usePost";
-import React from "react";
 import { Pagination } from "@mui/material";
 
 function PaginationComponent() {
@@ -13,12 +12,12 @@ function PaginationComponent() {
   }
 
   return (
-    <div>
+    <div role={"presentation"}>
       <Pagination
         onChange={(e: any, value: number) => post?.handlePagination(value - 1)}
         page={currentPage}
         count={post?.pageNumber}
-        color='secondary'
+        color="secondary"
       />
     </div>
   );
