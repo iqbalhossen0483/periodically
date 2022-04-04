@@ -1,5 +1,8 @@
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Router } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
+import { createMemoryHistory } from "history";
+import "@testing-library/jest-dom";
 import App from "./App";
 
 test("render App component", () => {
@@ -10,4 +13,26 @@ test("render App component", () => {
   );
   const appComponent = screen.getByRole("application");
   expect(appComponent).toBeInTheDocument();
+});
+
+test("check home route, is routing", () => {
+  const history = createMemoryHistory();
+  render(
+    <Router navigator={history} location={"/home"}>
+      <App />
+    </Router>
+  );
+  userEvent.click(screen.getByRole("main"));
+  expect(screen.getByRole("main")).toBeInTheDocument();
+});
+
+test("check json route, is routing", () => {
+  const history = createMemoryHistory();
+  render(
+    <Router navigator={history} location={"/json/:query"}>
+      <App />
+    </Router>
+  );
+  userEvent.click(screen.getByRole("listitem"));
+  expect(screen.getByRole("listitem")).toBeInTheDocument();
 });
