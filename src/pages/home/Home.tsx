@@ -17,7 +17,7 @@ function Home() {
   const headers: string[] = ["Title", "URL", "Author", "Created_at"];
 
   return (
-    <div className="m-5" role="table">
+    <div className="m-5" role="main">
       {post?.pagePost && (
         <TableContainer>
           <Table>
@@ -36,7 +36,6 @@ function Home() {
                 const time = item.created_at.slice(11, 19);
                 return (
                   <TableRow
-                    role={"row"}
                     onClick={() =>
                       navigate(
                         `/json/${
