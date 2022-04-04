@@ -1,5 +1,5 @@
-import { Pagination, Table } from "@mui/material";
-import { render, screen } from "@testing-library/react";
+import { Pagination, Table, TableRow } from "@mui/material";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import Home from "./Home";
 import PaginationComponent from "./Pagination";
@@ -30,4 +30,10 @@ test("render table component", () => {
   render(<Table />);
   const table = screen.getByRole("table");
   expect(table).toBeInTheDocument();
+});
+
+test("check weather table row clickable", () => {
+  render(<TableRow />);
+  fireEvent.click(screen.getByRole("row"));
+  expect(screen.getByRole("row")).not.toBeDisabled();
 });
