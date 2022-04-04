@@ -6,7 +6,7 @@ function App() {
   return (
     <div role="application">
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/json/:query" element={<Json />} />
       </Routes>
     </div>
