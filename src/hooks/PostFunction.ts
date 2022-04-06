@@ -4,12 +4,14 @@ export interface PostSchema {
   pagePost: Post[] | null;
   pageNumber: number;
   currentPage: number;
+  loading: boolean;
   handlePagination: (pageNum: number) => void;
 }
 
 function PostFunction(): PostSchema {
   const [pagePost, setPagePost] = useState<Post[] | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [post, setPost] = useState<Post[] | []>([]);
 
@@ -26,6 +28,7 @@ function PostFunction(): PostSchema {
       let initialData = await loadData("0");
       setPost(initialData);
       setPagePost(initialData);
+      setLoading(false);
 
       //call api after every 10 seconds;
       let pageNum: number = 0;
@@ -62,6 +65,7 @@ function PostFunction(): PostSchema {
   return {
     pageNumber,
     pagePost,
+    loading,
     currentPage,
     handlePagination,
   };

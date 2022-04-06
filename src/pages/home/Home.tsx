@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import usePost from "../../hooks/usePost";
+import Spinner from "../../utilitize/Spinner";
 import PaginationComponent from "./Pagination";
 
 function Home() {
@@ -16,8 +17,12 @@ function Home() {
 
   const headers: string[] = ["Title", "URL", "Author", "Created_at"];
 
+  if (post?.loading) {
+    return <Spinner />;
+  }
+
   return (
-    <div className="m-5" role="main">
+    <div className="m-5" data-testid="home-container">
       {post?.pagePost && (
         <TableContainer>
           <Table>
@@ -36,13 +41,7 @@ function Home() {
                 const time = item.created_at.slice(11, 19);
                 return (
                   <TableRow
-                    onClick={() =>
-                      navigate(
-                        `/json/${
-                          item.objectID
-                        }&&${post?.currentPage.toString()}`
-                      )
-                    }
+                    onClick={() => navigate(`/json/${item.objectID}`)}
                     hover
                     key={index}
                   >

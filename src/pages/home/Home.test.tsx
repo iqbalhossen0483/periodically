@@ -11,7 +11,7 @@ describe("home page", () => {
         <Home />
       </BrowserRouter>
     );
-    const homeComponent = screen.getByRole("main");
+    const homeComponent = screen.getByTestId("home-container");
     expect(homeComponent).toBeInTheDocument();
   });
 

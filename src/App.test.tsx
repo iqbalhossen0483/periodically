@@ -2,7 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter, Router } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
-import "@testing-library/jest-dom";
 import App from "./App";
 
 describe("app component", () => {
@@ -23,8 +22,8 @@ describe("app component", () => {
         <App />
       </Router>
     );
-    userEvent.click(screen.getByRole("main"));
-    expect(screen.getByRole("main")).toBeInTheDocument();
+    userEvent.click(screen.getByTestId("home-container"));
+    expect(screen.getByTestId("home-container")).toBeInTheDocument();
   });
 
   test("check json route, is routing", () => {
