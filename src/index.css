@@ -7,4 +7,10 @@
   .pagination {
     @apply col-span-3 mt-10 flex justify-center space-x-4;
   }
+  .not-found-conainer {
+    @apply h-[80vh] flex flex-col justify-center items-center text-xl font-medium text-center;
+  }
+  .spinner {
+    @apply h-[80vh] flex justify-center items-center text-xl text-center;
+  }
 }
