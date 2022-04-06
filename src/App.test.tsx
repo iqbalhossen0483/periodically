@@ -5,7 +5,7 @@ import { createMemoryHistory } from "history";
 import App from "./App";
 
 describe("app component", () => {
-  test("render App component", () => {
+  test("checking rendering App component", () => {
     render(
       <BrowserRouter>
         <App />
@@ -15,7 +15,7 @@ describe("app component", () => {
     expect(appComponent).toBeInTheDocument();
   });
 
-  test("check home route, is routing", () => {
+  test("render home route", () => {
     const history = createMemoryHistory();
     render(
       <Router navigator={history} location={"/"}>
@@ -26,14 +26,25 @@ describe("app component", () => {
     expect(screen.getByTestId("home-container")).toBeInTheDocument();
   });
 
-  test("check json route, is routing", () => {
+  test("render json route", () => {
     const history = createMemoryHistory();
     render(
       <Router navigator={history} location={"/json/:query"}>
         <App />
       </Router>
     );
-    userEvent.click(screen.getByRole("listitem"));
-    expect(screen.getByRole("listitem")).toBeInTheDocument();
+    userEvent.click(screen.getByTestId("json-page"));
+    expect(screen.getByTestId("json-page")).toBeInTheDocument();
+  });
+
+  test("render 404 route", () => {
+    const history = createMemoryHistory();
+    render(
+      <Router navigator={history} location={"/*"}>
+        <App />
+      </Router>
+    );
+    userEvent.click(screen.getByText("404, Page not found"));
+    expect(screen.getByText("404, Page not found")).toBeInTheDocument();
   });
 });

@@ -25,8 +25,9 @@ function Home() {
     <div className="m-5" data-testid="home-container">
       {post?.pagePost && (
         <TableContainer>
+          <p>home page</p>
           <Table>
-            <TableHead>
+            <TableHead data-testid="table-header">
               <TableRow>
                 {headers.map((item, index) => (
                   <TableCell align="center" key={index}>

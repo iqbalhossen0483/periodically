@@ -16,7 +16,7 @@ const Json = () => {
   }, [post, objectId]);
 
   return (
-    <div role={"listitem"} className="w-screen p-5">
+    <div data-testid="json-page" className="w-screen p-5">
       {jsonData && <pre>{jsonData}</pre>}
     </div>
   );
