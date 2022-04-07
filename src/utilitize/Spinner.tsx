@@ -1,8 +1,6 @@
-import React from "react";
-
 const Spinner = () => {
   return (
-    <div className="spinner">
+    <div data-testid="home-container" className="spinner">
       <p>Loading...</p>
     </div>
   );

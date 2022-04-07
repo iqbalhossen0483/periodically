@@ -5,15 +5,14 @@ import "./json.css";
 
 const Json = () => {
   const [jsonData, setJsonData] = useState<string | null>(null);
-  const { query } = useParams();
-  const objectId = query?.split("&&")[0];
+  const { id } = useParams();
   const post = usePost();
 
   useEffect(() => {
     let data: Post | undefined;
-    data = post?.pagePost?.find((item) => item.objectID === objectId);
+    data = post?.pagePost?.find((item) => item.objectID === id);
     setJsonData(JSON.stringify(data, undefined, 2));
-  }, [post, objectId]);
+  }, [id, post]);
 
   return (
     <div data-testid="json-page" className="w-screen p-5">

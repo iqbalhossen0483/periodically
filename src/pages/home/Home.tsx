@@ -2,7 +2,6 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
 } from "@mui/material";
@@ -23,49 +22,47 @@ function Home() {
 
   return (
     <div className="m-5" data-testid="home-container">
-      {post?.pagePost && (
-        <TableContainer>
-          <p>home page</p>
-          <Table>
-            <TableHead data-testid="table-header">
-              <TableRow>
-                {headers.map((item, index) => (
-                  <TableCell align="center" key={index}>
-                    <p className="text-xl font-semibold">{item}</p>
+      <Table>
+        <TableHead data-testid="table-header">
+          <TableRow>
+            {headers.map((item, index) => (
+              <TableCell align="center" key={index}>
+                <p className="text-xl font-semibold">{item}</p>
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+
+        {post?.pagePost && (
+          <TableBody>
+            {post?.pagePost.map((item, index) => {
+              const date = item.created_at.slice(0, 10);
+              const time = item.created_at.slice(11, 19);
+              return (
+                <TableRow
+                  onClick={() => navigate(`/json/${item.objectID}`)}
+                  hover
+                  key={index}
+                >
+                  <TableCell>
+                    <span className="break-words">{item.title}</span>
                   </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {post?.pagePost.map((item, index) => {
-                const date = item.created_at.slice(0, 10);
-                const time = item.created_at.slice(11, 19);
-                return (
-                  <TableRow
-                    onClick={() => navigate(`/json/${item.objectID}`)}
-                    hover
-                    key={index}
-                  >
-                    <TableCell>
-                      <span className="break-words">{item.title}</span>
-                    </TableCell>
-                    <TableCell>
-                      <span>{item.url?.slice(0, 50) || "url"}</span>
-                    </TableCell>
-                    <TableCell>{item.author}</TableCell>
-                    <TableCell>
-                      {date} {time}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+                  <TableCell>
+                    <span>{item.url?.slice(0, 50) || "url"}</span>
+                  </TableCell>
+                  <TableCell>{item.author}</TableCell>
+                  <TableCell>
+                    {date} {time}
+                  </TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        )}
+      </Table>
 
       <div className="pagination">
-        {post?.pagePost && <PaginationComponent />}
+        {post?.pagePost ? <PaginationComponent /> : <p>no page</p>}
       </div>
     </div>
   );

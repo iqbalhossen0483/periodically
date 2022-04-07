@@ -15,21 +15,22 @@ describe("app component", () => {
     expect(appComponent).toBeInTheDocument();
   });
 
-  test("render home route", () => {
+  test("render home route", async () => {
     const history = createMemoryHistory();
     render(
       <Router navigator={history} location={"/"}>
         <App />
       </Router>
     );
-    userEvent.click(screen.getByTestId("home-container"));
-    expect(screen.getByTestId("home-container")).toBeInTheDocument();
+    const container = await screen.findByTestId("home-container");
+    userEvent.click(container);
+    expect(container).toBeInTheDocument();
   });
 
   test("render json route", () => {
     const history = createMemoryHistory();
     render(
-      <Router navigator={history} location={"/json/:query"}>
+      <Router navigator={history} location={"/json/id"}>
         <App />
       </Router>
     );

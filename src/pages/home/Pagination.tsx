@@ -12,7 +12,7 @@ function PaginationComponent() {
   }
 
   return (
-    <div role={"presentation"}>
+    <div data-testid="pagination">
       <Pagination
         onChange={(e: any, value: number) => post?.handlePagination(value - 1)}
         page={currentPage}
