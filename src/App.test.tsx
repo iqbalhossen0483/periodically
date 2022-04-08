@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter, Router } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
+import "@testing-library/dom";
 import App from "./App";
 
 describe("app component", () => {

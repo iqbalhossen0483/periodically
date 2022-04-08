@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import PostProvider from "../../contex api/PostProvider";
 import { PostSchema } from "../../hooks/PostFunction";
+import "@testing-library/dom";
 import Home from "../home/Home";
 import Json from "./Json";
 
@@ -24,8 +25,8 @@ const store: PostSchema = {
 describe("json page", () => {
   test("render json page", () => {
     render(<Json />);
-    const homeComponent = screen.getByTestId("json-page");
-    expect(homeComponent).toBeInTheDocument();
+    const jsonComponent = screen.getByTestId("json-page");
+    expect(jsonComponent).toBeInTheDocument();
   });
   test("Check if rendered raw JSON is the correct one", () => {
     render(

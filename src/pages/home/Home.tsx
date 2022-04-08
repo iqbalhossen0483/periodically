@@ -34,12 +34,13 @@ function Home() {
         </TableHead>
 
         {post?.pagePost && (
-          <TableBody>
+          <TableBody data-testid="table-body">
             {post?.pagePost.map((item, index) => {
               const date = item.created_at.slice(0, 10);
               const time = item.created_at.slice(11, 19);
               return (
                 <TableRow
+                  data-testid={`rowLink-${index}`}
                   onClick={() => navigate(`/json/${item.objectID}`)}
                   hover
                   key={index}

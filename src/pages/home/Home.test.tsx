@@ -1,4 +1,4 @@
-import { screen, render } from "@testing-library/react";
+import { screen, render, within } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import PostProvider from "../../contex api/PostProvider";
 import { PostSchema } from "../../hooks/PostFunction";
@@ -94,10 +94,10 @@ describe("home page", () => {
         </BrowserRouter>
       );
       const tableHeader = screen.getByTestId("table-header");
-      const title = screen.getByText("Title");
-      const url = screen.getByText("URL");
-      const author = screen.getByText("Author");
-      const created_at = screen.getByText("Created_at");
+      const title = within(tableHeader).getByText("Title");
+      const url = within(tableHeader).getByText("URL");
+      const author = within(tableHeader).getByText("Author");
+      const created_at = within(tableHeader).getByText("Created_at");
 
       expect(tableHeader).toBeInTheDocument();
       expect(title).toBeInTheDocument();
