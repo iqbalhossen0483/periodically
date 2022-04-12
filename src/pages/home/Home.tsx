@@ -63,7 +63,7 @@ function Home() {
       </Table>
 
       <div className="pagination">
-        {post?.pagePost ? <PaginationComponent /> : <p>no page</p>}
+        {post?.pagePost && <PaginationComponent />}
       </div>
     </div>
   );
