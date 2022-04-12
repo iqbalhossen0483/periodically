@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter, Router } from "react-router-dom";
-import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
 import "@testing-library/dom";
 import App from "./App";
@@ -24,7 +23,6 @@ describe("app component", () => {
       </Router>
     );
     const container = await screen.findByTestId("home-container");
-    userEvent.click(container);
     expect(container).toBeInTheDocument();
   });
 
@@ -35,7 +33,6 @@ describe("app component", () => {
         <App />
       </Router>
     );
-    userEvent.click(screen.getByTestId("json-page"));
     expect(screen.getByTestId("json-page")).toBeInTheDocument();
   });
 
@@ -46,7 +43,6 @@ describe("app component", () => {
         <App />
       </Router>
     );
-    userEvent.click(screen.getByText("404, Page not found"));
     expect(screen.getByText("404, Page not found")).toBeInTheDocument();
   });
 });

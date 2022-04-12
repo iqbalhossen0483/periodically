@@ -22,7 +22,8 @@ const store: PostSchema = {
 };
 
 describe("home page", () => {
-  test("Home page is rendering", () => {
+  beforeEach(() => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
     render(
       <BrowserRouter>
         <PostProvider store={store}>
@@ -30,31 +31,20 @@ describe("home page", () => {
         </PostProvider>
       </BrowserRouter>
     );
+  });
+
+  test("Home page is rendering", () => {
     const homeComponent = screen.getByTestId("home-container");
     expect(homeComponent).toBeInTheDocument();
   });
 
   describe("pagination testing", () => {
     test("pagination is rendering", async () => {
-      render(
-        <BrowserRouter>
-          <PostProvider store={store}>
-            <Home />
-          </PostProvider>
-        </BrowserRouter>
-      );
       const pagination = await screen.findByTestId("pagination");
       expect(pagination).toBeInTheDocument();
     });
 
     test("Check the pagination component at least have 1 page", async () => {
-      render(
-        <BrowserRouter>
-          <PostProvider store={store}>
-            <Home />
-          </PostProvider>
-        </BrowserRouter>
-      );
       const page = await screen.findByText("1");
       expect(page).toBeInTheDocument();
     });
@@ -62,37 +52,16 @@ describe("home page", () => {
 
   describe("test the table", () => {
     test("table is rendering", async () => {
-      render(
-        <BrowserRouter>
-          <PostProvider store={store}>
-            <Home />
-          </PostProvider>
-        </BrowserRouter>
-      );
       const table = await screen.findByRole("table");
       expect(table).toBeInTheDocument();
     });
 
     test("check at least one row is containing news in the table", async () => {
-      render(
-        <BrowserRouter>
-          <PostProvider store={store}>
-            <Home />
-          </PostProvider>
-        </BrowserRouter>
-      );
-      const news = await screen.findByText(/rakib/i);
+      const news = await screen.findByText(/this is a blog/i);
       expect(news).toBeInTheDocument();
     });
 
     test("Check if the news row contains title, url, author, created_at properties", () => {
-      render(
-        <BrowserRouter>
-          <PostProvider store={store}>
-            <Home />
-          </PostProvider>
-        </BrowserRouter>
-      );
       const tableHeader = screen.getByTestId("table-header");
       const title = within(tableHeader).getByText("Title");
       const url = within(tableHeader).getByText("URL");
